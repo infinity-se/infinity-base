@@ -4,7 +4,7 @@ namespace InfinityBase\ServiceManager;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-trait ServiceLocatorTrait
+trait ServiceLocatorAwareTrait
 {
     /**
      * @var ServiceLocatorInterface
