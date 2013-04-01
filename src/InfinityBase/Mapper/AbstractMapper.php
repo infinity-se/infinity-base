@@ -11,7 +11,7 @@ abstract class AbstractMapper extends AbstractServiceLocatorAware
     /**
      * @var string
      */
-    private $abstractType = 'mapper';
+    protected $abstractType = 'mapper';
 
     /**
      * @var EntityRepository

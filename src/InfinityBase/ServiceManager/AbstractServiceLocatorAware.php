@@ -8,6 +8,11 @@ use Zend\ServiceManager\ServiceLocatorAwareInterface;
 class AbstractServiceLocatorAware implements ServiceLocatorAwareInterface
 {
     use EntityManagerAwareTrait;
+
+    /**
+     * @var string
+     */
+    protected $abstractType;
     
     /**
      * @var string

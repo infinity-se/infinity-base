@@ -12,7 +12,7 @@ abstract class AbstractService extends AbstractServiceLocatorAware
     /**
      * @var string
      */
-    private $abstractType = 'service';
+    protected $abstractType = 'service';
 
     /**
      * @var AbstractMapper
