@@ -8,8 +8,6 @@ use InfinityBase\ServiceManager\AbstractServiceLocatorAware;
 abstract class AbstractMapper extends AbstractServiceLocatorAware
 {
 
-    use EntityManagerAwareTrait;
-
     /**
      * @var EntityRepository
      */
