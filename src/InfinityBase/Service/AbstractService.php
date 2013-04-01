@@ -10,6 +10,11 @@ abstract class AbstractService extends AbstractServiceLocatorAware
 {
 
     /**
+     * @var string
+     */
+    private $abstractType = 'service';
+
+    /**
      * @var AbstractMapper
      */
     private $mapper;
@@ -62,7 +67,8 @@ abstract class AbstractService extends AbstractServiceLocatorAware
             /**
              * TO BE REMOVED -- BELOW
              */
-            throw new Exception('You are seeing this because this error needs to be properly handled.', 0, $e);
+            throw new Exception('You are seeing this because this error needs to be properly handled.',
+                                0, $e);
             /**
              * TO BE REMOVED -- ABOVE
              */
