@@ -18,7 +18,7 @@ abstract class AbstractMapper extends AbstractServiceLocatorAware
      * 
      * @return EntityRepository
      */
-    private function getRepository()
+    protected function getRepository()
     {
         if (null === $this->repository) {
             $this->repository = $this->getEntityManager()
