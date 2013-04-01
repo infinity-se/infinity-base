@@ -47,8 +47,9 @@ class AbstractServiceLocatorAware implements ServiceLocatorAwareInterface
     {
         if (null === $this->entityName) {
             $name = get_class($this);
-            $name = str_replace($this->getModuleNamespace() . '\\' . ucfirst($this->abstractType) . '\\', '', $name);
-            $name = str_replace($this->abstractType, '', $name);
+            $type = ucfirst($this->abstractType);
+            $name = str_replace($this->getModuleNamespace() . '\\' . $type . '\\', '', $name);
+            $name = str_replace($type, '', $name);
             $this->entityName = $name;
         }
         return $this->entityName;
