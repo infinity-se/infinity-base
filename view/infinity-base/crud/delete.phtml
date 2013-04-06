@@ -1,0 +1,12 @@
+<h1 class="page-header">
+    Delete <?php echo $this->entityName ?>
+</h1>
+<?php $entity = $this->form->getObject() ?>
+<p>
+    Please confirm that you wish to remove the <?php echo strtolower($this->entityName) ?>:
+    <em><?php echo $entity->getName() ?></em>.
+</p>
+<p>
+    <strong>Please note that this can NOT be undone.</strong>
+</p>
+<?php echo $this->form($this->form) ?>

@@ -6,7 +6,7 @@ use InfinityBase\Service\AbstractServiceTrait;
 use InfinityBase\Entity\EntityAwareTrait;
 use Zend\Mvc\Controller\AbstractActionController as ZendAbstractActionController;
 
-class AbstractActionController extends ZendAbstractActionController
+abstract class AbstractActionController extends ZendAbstractActionController
 {
     use AbstractServiceTrait;
     use EntityAwareTrait;

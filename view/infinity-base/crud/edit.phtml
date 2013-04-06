@@ -1,0 +1,27 @@
+<div class="span12">
+    <h1 class="page-header">
+        Edit <?php echo $this->entityName ?>
+    </h1>
+    <?php $account = $this->form->getObject() ?>
+    <dl class="dl-horizontal">
+        <dt>Created</dt>
+        <dd>
+            <?php $created = $account->getCreated() ?>
+            <time datetime="<?php echo $created->format('c') ?>">
+                <?php echo $created->format('jS F Y \a\t g:ia') ?>
+            </time>
+        </dd>
+        <dt>Last Modified</dt>
+        <dd>
+            <?php $lastModified = $account->getLastModified() ?>
+            <time datetime="<?php echo $lastModified->format('c') ?>">
+                <?php echo $lastModified->format('jS F Y \a\t g:ia') ?>
+            </time>
+        </dd>
+    </p>
+    <div class="row-fluid">
+        <div class="span6">
+            <?php echo $this->form($this->form) ?>
+        </div>
+    </div>
+</div>

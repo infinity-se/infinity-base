@@ -8,6 +8,11 @@ use InfinityBase\ServiceManager\AbstractServiceLocatorAware;
 abstract class AbstractService extends AbstractServiceLocatorAware
 {
     use AbstractServiceTrait;
+    
+    /**
+     * @var mixed
+     */
+    private $identity;
 
     /**
      * @var string
