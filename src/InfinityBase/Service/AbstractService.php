@@ -2,12 +2,12 @@
 
 namespace InfinityBase\Service;
 
+use InfinityBase\Service\AbstractServiceTrait;
 use InfinityBase\ServiceManager\AbstractServiceLocatorAware;
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
-use Zend\Form\Form;
 
 abstract class AbstractService extends AbstractServiceLocatorAware
 {
+    use AbstractServiceTrait;
 
     /**
      * @var string
@@ -15,23 +15,28 @@ abstract class AbstractService extends AbstractServiceLocatorAware
     protected $abstractType = 'service';
 
     /**
-     * @var AbstractMapper
-     */
-    private $mapper;
-
-    /**
-     * @var array
-     */
-    private $form = array();
-
-    /**
-     * @var FlashMessenger
-     */
-    private $messenger;
-
-    /**
      * PROTECTED METHODS
      */
+
+    /**
+     * Get the current identity
+     * 
+     * @return User
+     */
+    protected function identity()
+    {
+        // Get authentication service
+        if (null === $this->identity) {
+            $authenticationService = $this->getServiceLocator()
+                    ->get('Zend\Authentication\AuthenticationService');
+            if (!$authenticationService->hasIdentity()) {
+                throw new \Exception('No identity loaded');
+            }
+            $this->identity = $authenticationService->getIdentity();
+        }
+        
+        return $this->identity;
+    }
 
     /**
      * Flush the entityManager and handle errors
@@ -67,67 +72,13 @@ abstract class AbstractService extends AbstractServiceLocatorAware
             /**
              * TO BE REMOVED -- BELOW
              */
-            throw new Exception('You are seeing this because this error needs to be properly handled.',
+            throw new \Exception('You are seeing this because this error needs to be properly handled.',
                                 0, $e);
             /**
              * TO BE REMOVED -- ABOVE
              */
             return false;
         }
-    }
-
-    /**
-     * Add a message to the flashMessenger
-     *
-     * @param string|array $message
-     * @param string $namespace
-     */
-    protected function addMessage($message, $namespace = 'default')
-    {
-        // Load flashMessenger
-        if (null === $this->messenger) {
-            $this->messenger = $this->getServiceLocator()
-                    ->get('ControllerPluginManager')
-                    ->get('flashMessenger');
-        }
-
-        // Set current namespace
-        $this->messenger->setNamespace($namespace);
-
-        // Add messages
-        $message = (array) $message;
-        foreach ($message as $value) {
-            $this->messenger->addMessage($value);
-        }
-    }
-
-    /**
-     * Retrieve a form
-     *
-     * @param string $name
-     * @return Form
-     */
-    protected function getForm($name)
-    {
-        if (!isset($this->form[$name])) {
-            $this->form[$name] = $this->getServiceLocator()
-                    ->get($this->getModuleNamespace() . '\Form\\' . $name);
-        }
-        return $this->form[$name];
-    }
-
-    /**
-     * Retrieve the mapper
-     *
-     * @return AccountsMapper
-     */
-    protected function getMapper()
-    {
-        if (null === $this->mapper) {
-            $this->mapper = $this->getServiceLocator()
-                    ->get($this->getModuleNamespace() . '\Mapper\\' . $this->getEntityName());
-        }
-        return $this->mapper;
     }
 
 }
