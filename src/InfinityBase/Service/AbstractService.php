@@ -4,11 +4,13 @@ namespace InfinityBase\Service;
 
 use InfinityBase\Service\AbstractServiceTrait;
 use InfinityBase\ServiceManager\AbstractServiceLocatorAware;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 abstract class AbstractService extends AbstractServiceLocatorAware
 {
+
     use AbstractServiceTrait;
-    
+
     /**
      * @var mixed
      */
@@ -25,7 +27,7 @@ abstract class AbstractService extends AbstractServiceLocatorAware
 
     /**
      * Get the current identity
-     * 
+     *
      * @return User
      */
     protected function identity()
@@ -39,7 +41,7 @@ abstract class AbstractService extends AbstractServiceLocatorAware
             }
             $this->identity = $authenticationService->getIdentity();
         }
-        
+
         return $this->identity;
     }
 
@@ -52,10 +54,10 @@ abstract class AbstractService extends AbstractServiceLocatorAware
     {
         try {
             $this->getEntityManager()->flush();
-            $this->addMessage($successMessage, 'success');
+            $this->addMessage($successMessage, FlashMessenger::NAMESPACE_SUCCESS);
             return true;
         } catch (\Exception $e) {
-            $this->addMessage($failureMessage, 'error');
+            $this->addMessage($failureMessage, FlashMessenger::NAMESPACE_ERROR);
 
             // Check exception type
             if ($e instanceof \Doctrine\DBAL\DBALException) {
@@ -66,8 +68,7 @@ abstract class AbstractService extends AbstractServiceLocatorAware
                     switch ($previous->getCode()) {
                         case 1062:
                             $this->addMessage(
-                                    'You are using details that already exist.',
-                                    'error'
+                                    'You are using details that already exist.', 'error'
                             );
                             return false;
                     }
@@ -77,8 +78,7 @@ abstract class AbstractService extends AbstractServiceLocatorAware
             /**
              * TO BE REMOVED -- BELOW
              */
-            throw new \Exception('You are seeing this because this error needs to be properly handled.',
-                                0, $e);
+            throw new \Exception('You are seeing this because this error needs to be properly handled.', 0, $e);
             /**
              * TO BE REMOVED -- ABOVE
              */

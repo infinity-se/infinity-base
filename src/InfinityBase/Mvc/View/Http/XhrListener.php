@@ -9,6 +9,7 @@ use Zend\View\Model\ViewModel;
 
 class XhrListener implements ListenerAggregateInterface
 {
+
     /**
      * @var array
      */
@@ -21,7 +22,7 @@ class XhrListener implements ListenerAggregateInterface
     {
         $this->_listeners[] = $eventManager->attach(
                 'dispatch', array($this, 'check'), -100
-                );
+        );
     }
 
     /**
@@ -56,9 +57,8 @@ class XhrListener implements ListenerAggregateInterface
             // Set terminal
             $result->setTerminal(true);
             $event->setViewModel($result);
-
         }
-
     }
 
 }
+

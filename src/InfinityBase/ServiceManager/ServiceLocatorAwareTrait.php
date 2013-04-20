@@ -6,11 +6,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 trait ServiceLocatorAwareTrait
 {
+
     /**
      * @var ServiceLocatorInterface
      */
     private $_serviceLocator;
-
 
     /**
      * Retrieve the service locator
@@ -35,3 +35,4 @@ trait ServiceLocatorAwareTrait
     }
 
 }
+

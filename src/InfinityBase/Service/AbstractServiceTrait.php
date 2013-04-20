@@ -2,9 +2,9 @@
 
 namespace InfinityBase\Service;
 
-use Zend\Mvc\Controller\Plugin\FlashMessenger;
 use Zend\Form\Form;
 use Zend\Form\FormElementManager;
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 trait AbstractServiceTrait
 {
@@ -13,7 +13,7 @@ trait AbstractServiceTrait
      * @var AbstractMapper
      */
     private $mapper;
-    
+
     /**
      * @var FormElementManager
      */
@@ -28,7 +28,6 @@ trait AbstractServiceTrait
      * @var FlashMessenger
      */
     private $messenger;
-    
 
     /**
      * Add a message to the flashMessenger
@@ -36,7 +35,7 @@ trait AbstractServiceTrait
      * @param string|array $message
      * @param string $namespace
      */
-    protected function addMessage($message, $namespace = 'default')
+    protected function addMessage($message, $namespace = FlashMessenger::NAMESPACE_DEFAULT)
     {
         // Load flashMessenger
         if (null === $this->messenger) {
@@ -54,10 +53,10 @@ trait AbstractServiceTrait
             $this->messenger->addMessage($value);
         }
     }
-    
+
     /**
      * Retrieve form element manager
-     * 
+     *
      * @return FormElementManager
      */
     protected function getFormElementManager()
@@ -78,7 +77,7 @@ trait AbstractServiceTrait
     protected function getForm($name)
     {
         if (!isset($this->form[$name])) {
-            $this->form[$name] = $this->getFormElementManager()
+            $this->form[$name] = $this->getServiceLocator()
                     ->get($this->getModuleNamespace() . '\Form\\' . $name);
         }
         return $this->form[$name];
@@ -97,4 +96,6 @@ trait AbstractServiceTrait
         }
         return $this->mapper;
     }
+
 }
+

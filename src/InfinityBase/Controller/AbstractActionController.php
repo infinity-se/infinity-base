@@ -8,19 +8,21 @@ use Zend\Mvc\Controller\AbstractActionController as ZendAbstractActionController
 
 abstract class AbstractActionController extends ZendAbstractActionController
 {
+
     use AbstractServiceTrait;
-    use EntityAwareTrait;
-    
+
+use EntityAwareTrait;
+
     /**
      * @var string
      */
     protected $abstractType = 'controller';
-    
+
     /**
      * @var AbstractService
      */
     private $service;
-    
+
     /**
      * Retrieve the service
      *
@@ -37,3 +39,4 @@ abstract class AbstractActionController extends ZendAbstractActionController
     }
 
 }
+

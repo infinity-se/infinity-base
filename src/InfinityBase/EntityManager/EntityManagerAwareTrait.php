@@ -7,6 +7,7 @@ use InfinityBase\ServiceManager\ServiceLocatorAwareTrait;
 
 trait EntityManagerAwareTrait
 {
+
     use ServiceLocatorAwareTrait;
 
     /**
@@ -27,4 +28,6 @@ trait EntityManagerAwareTrait
         }
         return $this->_entityManager;
     }
+
 }
+

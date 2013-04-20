@@ -72,7 +72,6 @@ class Messages extends AbstractHelper
 
             // Add message
             $output .= '<li>' . $message . '</li>';
-
         }
 
         // Finish output
@@ -80,4 +79,6 @@ class Messages extends AbstractHelper
 
         return $output;
     }
+
 }
+

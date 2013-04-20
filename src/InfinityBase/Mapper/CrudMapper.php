@@ -7,7 +7,7 @@ class CrudMapper extends AbstractMapper
 
     /**
      * Find entity by id
-     * 
+     *
      * @param int $id
      * @return object
      */
@@ -15,15 +15,16 @@ class CrudMapper extends AbstractMapper
     {
         return $this->getRepository()->find($id);
     }
-    
+
     /**
      * Find entities
-     * 
+     *
      * @return array
      */
     public function findAll()
     {
         return $this->getRepository()->findAll();
     }
-    
+
 }
+

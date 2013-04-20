@@ -2,12 +2,14 @@
 
 namespace InfinityBase\Service;
 
+use Zend\Mvc\Controller\Plugin\FlashMessenger;
 
 abstract class CrudService extends AbstractService
 {
+
     /**
      * Create entity
-     * 
+     *
      * @return boolean
      */
     public function create()
@@ -19,11 +21,11 @@ abstract class CrudService extends AbstractService
         }
 
         // Insert new entity
-        $now     = new \DateTime();
+        $now    = new \DateTime();
         $entity = $form->getData();
         $entity->setLastModified($now);
         $entity->setCreated($now);
-        
+
         // Trigger oncreate
         $this->onCreate($entity);
 
@@ -34,7 +36,7 @@ abstract class CrudService extends AbstractService
 
     /**
      * Edit entity
-     * 
+     *
      * @return boolean
      */
     public function edit()
@@ -52,14 +54,14 @@ abstract class CrudService extends AbstractService
 
         // Trigger onedit
         $this->onEdit($entity);
-        
+
         // Save
         return $this->save($this->getEntityName() . ' saved.', 'Unable to save ' . strtolower($this->getEntityName()) . '.');
     }
 
     /**
      * Delete entity
-     * 
+     *
      * @return boolean
      */
     public function delete()
@@ -67,21 +69,34 @@ abstract class CrudService extends AbstractService
         // Validate form
         $form = $this->getForm('Delete' . $this->getEntityName());
         if (!$form->isValid()) {
+            $this->addMessage($form->getMessages(), FlashMessenger::NAMESPACE_ERROR);
             return false;
         }
 
         // Remove account entity
         $entity = $form->getData();
         $this->getEntityManager()->remove($entity);
-        
+
         // Trigger ondelete
         $this->onDelete($entity);
 
         // Save
         return $this->save($this->getEntityName() . ' deleted.', 'Unable to delete ' . strtolower($this->getEntityName()) . '.');
     }
-    
-    public function onCreate($entity){}
-    public function onEdit($entity){}
-    public function onDelete($entity){}
+
+    public function onCreate($entity)
+    {
+
+    }
+
+    public function onEdit($entity)
+    {
+
+    }
+
+    public function onDelete($entity)
+    {
+
+    }
+
 }
